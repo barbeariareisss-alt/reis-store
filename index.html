@@ -1,197 +1,95 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>REIS STORE</title>
-<style>
-*{box-sizing:border-box}
-body{margin:0;background:#101010;color:#f4f1ed;font-family:Arial,sans-serif}
-header{padding:28px 20px;border-bottom:1px solid #292929;text-align:center}
-.logo{font-size:27px;letter-spacing:5px;font-weight:bold}
-.sub{font-size:10px;letter-spacing:4px;color:#999;margin-top:8px}
-nav{display:flex;gap:10px;overflow:auto;padding:15px}
-nav button,.filter{background:#1b1b1b;color:#ddd;border:1px solid #333;border-radius:30px;padding:10px 16px}
-.hero{padding:30px 20px 20px}
-.hero h1{font-size:34px;line-height:1.15;margin:0 0 12px}
-.hero p{color:#999;font-size:14px;line-height:1.6}
-.search{padding:0 20px 20px}
-.search input{width:100%;padding:15px;background:#1a1a1a;border:1px solid #333;color:white;border-radius:12px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 12px 30px}
-.card{background:#191919;border:1px solid #292929;border-radius:15px;overflow:hidden}
-.bottle{height:190px;background:linear-gradient(145deg,#252525,#111);display:flex;align-items:center;justify-content:center;padding:15px}
-.bottle img{max-width:100%;max-height:100%;object-fit:contain}
-.placeholder{font-size:12px;color:#666;letter-spacing:2px;text-align:center}
-.cardinfo{padding:13px}
-.cardinfo h3{font-size:15px;margin:0 0 7px}
-.cardinfo p{font-size:11px;color:#999;margin:0 0 10px}
-.price{font-size:17px;font-weight:bold;margin:8px 0}
-.smallbtn{width:100%;background:#e5dfd5;color:#111;border:0;padding:11px;border-radius:8px;font-weight:bold}
-.detail{display:none;position:fixed;inset:0;background:#101010;z-index:5;overflow:auto;padding:20px}
-.detail.active{display:block}
-.close{float:right;background:#222;color:white;border:1px solid #444;padding:10px 15px;border-radius:8px}
-.detailimg{height:280px;background:#1b1b1b;display:flex;align-items:center;justify-content:center;margin-top:20px;border-radius:15px}
-.detailimg img{max-height:95%;max-width:95%;object-fit:contain}
-.detail h2{margin-top:20px}
-.notes{color:#aaa;font-size:14px;line-height:1.7}
-select, .qty{background:#1b1b1b;color:white;border:1px solid #444;padding:12px;border-radius:8px;width:100%;margin:8px 0}
-.add{background:#e5dfd5;color:#111;padding:15px;border:0;border-radius:9px;width:100%;font-weight:bold;margin-top:10px}
-.cartbar{position:fixed;bottom:12px;left:12px;right:12px;background:#e5dfd5;color:#111;padding:16px;border-radius:12px;font-weight:bold;display:flex;justify-content:space-between;align-items:center;z-index:3}
-.cart{display:none;position:fixed;inset:0;background:#101010;z-index:8;padding:20px;overflow:auto}
-.cart.active{display:block}
-.cartitem{display:flex;justify-content:space-between;border-bottom:1px solid #333;padding:15px 0;gap:10px}
-.checkout{background:#25d366;color:#111;border:0;border-radius:10px;padding:15px;width:100%;font-weight:bold;margin-top:20px}
-footer{text-align:center;color:#777;padding:30px;font-size:11px;letter-spacing:2px}
-@media(min-width:700px){.grid{grid-template-columns:repeat(4,1fr)}.hero{max-width:900px;margin:auto}.search{max-width:900px;margin:auto}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#101010" />
+  <meta name="description" content="Reis STORE — perfumes originais e decants. Encontre sua próxima fragrância." />
+  <title>REIS STORE — Perfumes & Decants</title>
+  <style>
+    :root{--bg:#0b0b0c;--panel:#151516;--panel2:#1b1b1d;--line:#2a2a2d;--text:#f1f0ed;--muted:#96969b;--accent:#d6c7a0;--accent2:#b7a47c;--danger:#d6786b;--radius:20px;--shadow:0 20px 60px rgba(0,0,0,.45)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:.01em}button,input{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}.wrap{width:min(1180px,100% - 34px);margin:auto}
+    header{position:sticky;top:0;z-index:30;background:rgba(11,11,12,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}.header-inner{padding:20px 0 15px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:12px}.crown{font-size:24px;color:var(--accent);line-height:1}.brand-name{font-size:20px;font-weight:800;letter-spacing:.28em}.brand-sub{font-size:9px;color:var(--muted);letter-spacing:.32em;margin-top:5px}.header-actions{display:flex;gap:10px}.icon-btn{border:1px solid var(--line);background:var(--panel);color:var(--text);height:44px;min-width:44px;border-radius:14px;display:grid;place-items:center;position:relative}.cart-count{position:absolute;top:-6px;right:-6px;background:var(--accent);color:#171717;border-radius:99px;font-size:11px;font-weight:800;min-width:19px;height:19px;display:grid;place-items:center;padding:0 4px}
+    .hero{padding:45px 0 25px}.eyebrow{color:var(--accent);font-size:10px;letter-spacing:.32em;text-transform:uppercase}.hero h1{font-size:clamp(36px,8vw,76px);line-height:1.02;letter-spacing:-.055em;margin:17px 0 16px;font-weight:760;max-width:760px}.hero h1 span{color:var(--accent)}.hero p{color:var(--muted);line-height:1.65;max-width:590px;font-size:14px}.hero-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}.pill{border:1px solid var(--line);border-radius:99px;padding:9px 13px;color:#c7c7ca;font-size:11px;letter-spacing:.08em}
+    .toolbar{position:relative;display:flex;gap:10px;margin:20px 0 14px}.search-wrap{flex:1;position:relative}.search-wrap input{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:15px 16px 15px 44px;color:var(--text);outline:none}.search-wrap input:focus{border-color:var(--accent2)}.search-icon{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--muted)}.filter-btn{background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:15px;padding:0 15px}.category-nav{display:flex;gap:8px;overflow:auto;padding:5px 0 14px;scrollbar-width:none}.category-nav::-webkit-scrollbar{display:none}.category{white-space:nowrap;border:1px solid var(--line);background:#131314;color:#aaa;border-radius:99px;padding:10px 15px;font-size:12px;transition:.2s}.category.active,.category:hover{background:var(--accent);border-color:var(--accent);color:#151515}
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;padding:22px 0 16px}.section-head h2{margin:0;font-size:22px;letter-spacing:-.03em}.section-head small{color:var(--muted);font-size:11px}.product-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.product-card{border:1px solid var(--line);background:linear-gradient(160deg,#1a1a1b,#111112 65%);border-radius:18px;overflow:hidden;transition:transform .2s,border-color .2s;min-width:0}.product-card:hover{transform:translateY(-2px);border-color:#555}.product-visual{height:210px;background:radial-gradient(circle at 50% 40%,#343438 0,#1c1c1e 42%,#111 78%);display:flex;align-items:center;justify-content:center;position:relative;padding:18px}.product-visual img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 18px 14px rgba(0,0,0,.5))}.img-fallback{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;color:#777;width:100%;height:100%;padding:10px}.fallback-mark{font-size:36px;color:#777}.fallback-label{font-size:9px;letter-spacing:.3em}.product-tag{position:absolute;top:10px;left:10px;background:rgba(9,9,9,.75);border:1px solid #38383a;color:#bdbdc0;border-radius:99px;padding:6px 9px;font-size:9px;letter-spacing:.1em;text-transform:uppercase}.card-content{padding:13px}.brandline{color:var(--muted);font-size:9px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:7px}.product-name{font-size:14px;line-height:1.3;font-weight:700;min-height:37px;margin:0}.product-desc{color:#888;font-size:11px;line-height:1.5;margin:8px 0;min-height:32px}.price{font-weight:750;font-size:17px;margin:12px 0 10px}.price.consult{color:#b4b4b7;font-size:13px}.card-actions{display:flex;gap:8px}.btn{border:1px solid var(--line);background:#232325;color:var(--text);border-radius:12px;padding:11px 12px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;flex:1}.btn-primary{background:var(--accent);border-color:var(--accent);color:#141414;font-weight:800}.btn:hover{filter:brightness(1.1)}
+    .empty{padding:55px 15px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:18px;grid-column:1/-1}.empty strong{display:block;color:var(--text);margin-bottom:8px}
+    .about{margin:50px 0 32px;padding:28px;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(135deg,#19191a,#101011)}.about h2{font-size:23px;margin:0 0 10px}.about p{color:var(--muted);font-size:13px;line-height:1.7;max-width:650px}.about-mark{color:var(--accent);letter-spacing:.25em;font-size:10px}
+    footer{border-top:1px solid var(--line);padding:28px 0 105px;color:#777;font-size:11px}.footer-brand{color:var(--text);letter-spacing:.22em;font-size:13px;font-weight:800;margin-bottom:8px}.footer-row{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:14px}
+    .cart-float{position:fixed;bottom:15px;left:12px;right:12px;z-index:35;max-width:700px;margin:auto;background:#e7e4dc;color:#111;border-radius:17px;padding:14px 16px;box-shadow:0 10px 45px rgba(0,0,0,.5);display:flex;align-items:center;justify-content:space-between;gap:12px}.cart-float strong{font-size:14px}.cart-float span{font-size:12px;color:#555}.cart-open{border:0;background:#151516;color:#eee;border-radius:12px;padding:12px 15px;font-size:12px;font-weight:700}
+    .overlay{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.72);display:none;align-items:flex-end;justify-content:center}.overlay.show{display:flex}.drawer{width:min(700px,100%);max-height:92vh;overflow:auto;background:#151516;border:1px solid #333;border-radius:22px 22px 0 0;padding:18px;box-shadow:var(--shadow)}.drawer-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:14px}.drawer-head h2{margin:0;font-size:19px}.close{border:1px solid var(--line);background:#242426;color:white;border-radius:12px;width:42px;height:42px}.cart-items{display:flex;flex-direction:column;gap:12px}.cart-item{display:grid;grid-template-columns:62px 1fr auto;gap:12px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:12px}.cart-thumb{height:62px;border-radius:12px;background:#222;display:grid;place-items:center;color:#888;font-size:24px;overflow:hidden}.cart-thumb img{width:100%;height:100%;object-fit:contain}.cart-item-name{font-size:13px;font-weight:700}.cart-item-price{font-size:11px;color:var(--muted);margin-top:4px}.qty-controls{display:flex;align-items:center;gap:8px;margin-top:8px}.qty-controls button{border:1px solid var(--line);background:#252527;color:white;border-radius:8px;width:27px;height:27px}.qty-controls span{font-size:12px}.remove{border:0;background:none;color:var(--danger);font-size:11px;padding:6px}.cart-summary{border-top:1px solid var(--line);margin-top:16px;padding-top:15px}.total-row{display:flex;justify-content:space-between;font-size:14px;font-weight:800;margin-bottom:12px}.cart-note{font-size:11px;color:var(--muted);line-height:1.6;margin:12px 0}.checkout{width:100%;padding:15px;border:0;background:#c9b78c;color:#171717;font-weight:900;letter-spacing:.08em;text-transform:uppercase;border-radius:13px}.checkout:disabled{opacity:.4;cursor:not-allowed}
+    .detail-overlay{z-index:60}.detail-layout{display:grid;grid-template-columns:1fr 1fr;gap:18px}.detail-image{min-height:250px;border-radius:16px;background:radial-gradient(circle,#333,#151516 70%);display:grid;place-items:center;padding:20px}.detail-image img{width:100%;height:100%;max-height:330px;object-fit:contain}.detail-info .brandline{margin-top:5px}.detail-info h2{font-size:25px;line-height:1.1;margin:7px 0}.detail-info p{font-size:12px;color:var(--muted);line-height:1.6}.detail-info .price{margin:15px 0}.detail-info .btn{width:100%;flex:none}.detail-info{display:flex;flex-direction:column;gap:8px}
+    @media(min-width:700px){.hero{padding:65px 0 35px}.product-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.product-visual{height:300px}.card-content{padding:17px}.product-name{font-size:16px;min-height:42px}.product-desc{min-height:40px}.brand-name{font-size:24px}.header-inner{padding:24px 0}.about{padding:40px}.overlay{align-items:center}.drawer{border-radius:22px;max-height:85vh}.cart-float{bottom:22px}}
+    @media(min-width:1000px){.product-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.product-visual{height:330px}.hero h1{max-width:850px}}
+    @media(max-width:380px){.brand-name{font-size:17px;letter-spacing:.22em}.product-visual{height:175px}.card-content{padding:11px}.card-actions{flex-direction:column}.btn{padding:10px}.hero h1{font-size:34px}}
+  </style>
 </head>
 <body>
-
 <header>
-  <div class="logo">♛ REIS STORE</div>
-  <div class="sub">PERFUMARIA • ORIGINAL • DECANTS</div>
+  <div class="wrap header-inner">
+    <a class="brand" href="#top" aria-label="Reis STORE início"><span class="crown">♛</span><div><div class="brand-name">REIS STORE</div><div class="brand-sub">PERFUMARIA · ORIGINAL · DECANTS</div></div></a>
+    <div class="header-actions"><button class="icon-btn" id="topCart" aria-label="Abrir carrinho">♧<span class="cart-count" id="cartCount">0</span></button></div>
+  </div>
 </header>
-
-<nav>
-  <button onclick="filterProducts('Todos')">Todos</button>
-  <button onclick="filterProducts('Masculino')">Masculinos</button>
-  <button onclick="filterProducts('Unissex')">Unissex</button>
-  <button onclick="filterProducts('Feminino')">Femininos</button>
-  <button onclick="filterProducts('Decantes')">Decantes</button>
-</nav>
-
-<section class="hero">
-  <h1>Encontre sua<br>assinatura.</h1>
-  <p>Perfumes que marcam presença. Descubra sua próxima fragrância.</p>
-</section>
-
-<div class="search">
-  <input id="search" placeholder="Buscar perfume..." oninput="render()">
-</div>
-
-<div class="grid" id="grid"></div>
-
-<footer>REIS STORE — PERFUME É IDENTIDADE.</footer>
-
-<div class="cartbar" onclick="openCart()">
-  <span>🛒 Meu carrinho</span>
-  <span id="cartcount">0 itens</span>
-</div>
-
-<div class="detail" id="detail">
-  <button class="close" onclick="closeDetail()">✕ FECHAR</button>
-  <div class="detailimg" id="detailimg"></div>
-  <h2 id="detailname"></h2>
-  <p id="detaildesc" class="notes"></p>
-  <p id="detailnotes" class="notes"></p>
-  <h3 id="detailprice"></h3>
-  <select id="size">
-    <option value="full">Perfume completo</option>
-    <option value="10">Decante 10 ml</option>
-    <option value="30">Decante 30 ml</option>
-  </select>
-  <button class="add" onclick="addToCart()">ADICIONAR AO CARRINHO</button>
-</div>
-
-<div class="cart" id="cart">
-  <button class="close" onclick="closeCart()">✕ VOLTAR À LOJA</button>
-  <h2>Seu carrinho</h2>
-  <div id="cartitems"></div>
-  <h3 id="total"></h3>
-  <button class="checkout" onclick="checkout()">FINALIZAR PELO WHATSAPP</button>
-</div>
-
+<main class="wrap" id="top">
+  <section class="hero">
+    <div class="eyebrow">Perfume é presença.</div>
+    <h1>Encontre sua<br><span>assinatura.</span></h1>
+    <p>Perfumes que marcam presença. Descubra sua próxima fragrância — sem escolher no escuro.</p>
+    <div class="hero-meta"><span class="pill">PERFUMES ORIGINAIS</span><span class="pill">DECANTS</span><span class="pill">SEU PRÓXIMO FAVORITO</span></div>
+  </section>
+  <section aria-label="Catálogo">
+    <div class="toolbar"><div class="search-wrap"><span class="search-icon">⌕</span><input id="search" type="search" placeholder="Buscar perfume, marca ou estilo..." autocomplete="off" /></div></div>
+    <nav class="category-nav" id="categories" aria-label="Categorias"></nav>
+    <div class="section-head"><h2 id="catalogTitle">Catálogo</h2><small id="resultsCount"></small></div>
+    <div class="product-grid" id="products"></div>
+  </section>
+  <section class="about"><div class="about-mark">REIS STORE / CURADORIA</div><h2>Não é só perfume.<br>É presença.</h2><p>Fragrâncias originais e decants para você descobrir, experimentar e encontrar o perfume que combina com seu estilo. Escolha o seu. O resto é presença.</p></section>
+</main>
+<footer><div class="wrap"><div class="footer-brand">♛ REIS STORE</div><div>Perfumes originais · Decants · Atendimento direto</div><div class="footer-row"><span>© <span id="year"></span> REIS STORE</span><span>Feito para quem tem presença.</span></div></div></footer>
+<div class="cart-float" id="cartFloat" style="display:none"><div><strong>🛒 Meu carrinho</strong><br><span id="cartFloatText">0 itens</span></div><button class="cart-open" id="openCart">VER PEDIDO</button></div>
+<!-- CART DRAWER -->
+<div class="overlay" id="cartOverlay"><div class="drawer" role="dialog" aria-modal="true" aria-label="Carrinho"><div class="drawer-head"><h2>🛒 Seu pedido</h2><button class="close" data-close="cartOverlay">×</button></div><div id="cartItems" class="cart-items"></div><div class="cart-summary"><div class="total-row"><span>Total</span><span id="cartTotal">R$ 0,00</span></div><p class="cart-note">Confira seus itens. Ao continuar, o pedido será enviado para a Reis STORE no WhatsApp para confirmação.</p><button class="checkout" id="checkout" disabled>Finalizar pelo WhatsApp</button></div></div></div>
+<!-- PRODUCT DETAIL -->
+<div class="overlay detail-overlay" id="detailOverlay"><div class="drawer" role="dialog" aria-modal="true" aria-label="Detalhes do perfume"><div class="drawer-head"><h2>Detalhes da fragrância</h2><button class="close" data-close="detailOverlay">×</button></div><div id="detailContent"></div></div></div>
 <script>
-const products = [
- {name:"Club de Nuit Intense Man",category:"Masculino",price:289,dec10:35,dec30:85,notes:"Limão, abacaxi, bergamota, groselha e maçã. Notas de coração: bétula, jasmim e rosa. Base: musk, âmbar, patchouli e baunilha.",img:"",desc:"Uma fragrância marcante, elegante e versátil."},
- {name:"Bareeq Al Dhahab",category:"Unissex",price:159,dec10:25,dec30:60,notes:"Consulte a ficha olfativa da fragrância.",img:"",desc:"Uma fragrância para quem gosta de presença."},
- {name:"Khamrah Dukhan",category:"Unissex",price:259,dec10:35,dec30:85,notes:"Consulte a ficha olfativa da fragrância.",img:"",desc:"Intenso, envolvente e cheio de personalidade."},
- {name:"Hawas Black",category:"Masculino",price:279,dec10:35,dec30:85,notes:"Abacaxi, grapefruit e bergamota. Cedro, patchouli e jasmim. Base amadeirada, âmbar e musgo.",img:"",desc:"Uma fragrância moderna, marcante e envolvente."},
- {name:"Ravine Ginger",category:"Unissex",price:267,dec10:35,dec30:85,notes:"Gengibre, bergamota e limão. Flor de laranjeira, jasmim, rosa e magnólia. Baunilha, musk, sândalo, âmbar, patchouli e madeiras cashmere.",img:"",desc:"Uma fragrância vibrante com personalidade."},
- {name:"Honor & Glory",category:"Unissex",price:189,dec10:30,dec30:75,notes:"Consulte a ficha olfativa da fragrância.",img:"",desc:"Um perfume que combina presença e estilo."},
- {name:"Attar Al Wesal",category:"Unissex",price:149,dec10:25,dec30:60,notes:"Consulte a ficha olfativa da fragrância.",img:"",desc:"Uma experiência olfativa para descobrir."},
- {name:"Hércules",category:"Masculino",price:199,dec10:30,dec30:75,notes:"Consulte a ficha olfativa da fragrância.",img:"",desc:"Uma fragrância de personalidade."},
- {name:"Sex on the Rocks",category:"Unissex",price:199,dec10:30,dec30:75,notes:"Consulte a ficha olfativa da fragrância.",img:"",desc:"Uma fragrância para ocasiões especiais."},
- {name:"Vulcan Feu",category:"Unissex",price:299,dec10:40,dec30:95,notes:"Manga, gengibre, limão, ruibarbo e pimenta rosa. Jasmim, violeta e praline. Tonka, cedro, âmbar gris e musgo.",img:"",desc:"Intenso, ousado e com presença."},
- {name:"Al Layl",category:"Unissex",price:179,dec10:30,dec30:70,notes:"Framboesa, café, lavanda e bergamota. Pêssego, jasmim, rosa e cashmeran. Sândalo, patchouli e musk.",img:"",desc:"Uma fragrância com personalidade."},
- {name:"Ameer Al Arab",category:"Masculino",price:149,dec10:25,dec30:60,notes:"Jasmim e mirra. Manjericão, cardamomo, lavanda e pimenta. Patchouli, açafrão e sândalo.",img:"",desc:"Elegância árabe com personalidade."},
- {name:"Maahir Original",category:"Unissex",price:179,dec10:30,dec30:70,notes:"Frutas vermelhas, pêssego e bergamota. Jasmim, peônia e lírio vermelho. Sândalo, musk e baunilha.",img:"",desc:"Uma fragrância expressiva e sofisticada."},
- {name:"Al Noble Safeer",category:"Masculino",price:140,dec10:25,dec30:60,notes:"Gengibre, pimenta preta, bergamota e grapefruit. Heliotrópio, jasmim e caramelo. Musk, cypriol, cashmere, ambergris, baunilha e guaiaco.",img:"",desc:"Uma fragrância de presença."},
- {name:"No. 2 Men",category:"Masculino",price:199,dec10:30,dec30:75,notes:"Bergamota e lavanda. Gengibre e cardamomo. Incenso, guaiaco, ládano, musk, sândalo e vetiver.",img:"",desc:"Elegante e sofisticado."},
- {name:"Al Noble Wazeer",category:"Masculino",price:169,dec10:30,dec30:70,notes:"Maçã, cognac, noz-moscada e açafrão. Whisky, carvalho, cedro e sândalo. Musk, mirra, ambroxan e baunilha.",img:"",desc:"Uma fragrância amadeirada e envolvente."}
+// ==============================
+// CATÁLOGO: edite os produtos aqui.
+// price: preço em reais (número). Use null para "Consultar preço".
+// image: URL direta da foto do produto (HTTPS). Se não tiver, deixe vazio.
+// ==============================
+const PRODUCTS = [
+  {id:"cdn-intense",name:"Club de Nuit Intense Man",brand:"Armaf",category:"Masculinos",price:289.00,tag:"Mais procurado",description:"Um clássico marcante, cítrico e amadeirado.",notes:"Cítricos · Frutado · Madeira · Musk",image:"",type:"Perfume original"},
+  {id:"hawas-black",name:"Hawas Black",brand:"Rasasi",category:"Masculinos",price:279.00,tag:"Presença",description:"Fragrância intensa para quem gosta de chegar marcando presença.",notes:"Frutado · Cítrico · Amadeirado",image:"",type:"Perfume original"},
+  {id:"bareeq-dhahab",name:"Bareeq Al Dhahab",brand:"",category:"Unissex",price:null,tag:"",description:"Explore uma fragrância de personalidade.",notes:"Consulte as notas olfativas",image:"",type:"Perfume original"},
+  {id:"khamrah-dukhan",name:"Khamrah Dukhan",brand:"Lattafa",category:"Unissex",price:null,tag:"",description:"Uma fragrância envolvente e cheia de personalidade.",notes:"Consulte as notas olfativas",image:"",type:"Perfume original"},
+  {id:"ravine-ginger",name:"Ravine Ginger",brand:"French Avenue",category:"Unissex",price:null,tag:"",description:"Uma fragrância com energia e assinatura própria.",notes:"Gengibre · Cítricos · Floral · Amadeirado",image:"",type:"Perfume original"},
+  {id:"honor-glory",name:"Honor & Glory",brand:"Lattafa",category:"Unissex",price:null,tag:"",description:"Uma fragrância para quem gosta de se destacar.",notes:"Consulte as notas olfativas",image:"",type:"Perfume original"},
+  {id:"attar-wesal",name:"Attar Al Wesal",brand:"",category:"Unissex",price:null,tag:"",description:"Descubra uma fragrância diferente para sua coleção.",notes:"Consulte as notas olfativas",image:"",type:"Perfume original"},
+  {id:"hercules",name:"Hércules",brand:"",category:"Masculinos",price:null,tag:"",description:"Perfil marcante e personalidade própria.",notes:"Consulte as notas olfativas",image:"",type:"Perfume original"},
+  {id:"decant-10",name:"Decant 10ml",brand:"Reis STORE",category:"Decantes",price:null,tag:"Experimente",description:"Experimente a fragrância antes de investir no frasco completo.",notes:"Escolha o perfume desejado no atendimento",image:"",type:"Decant"},
+  {id:"decant-30",name:"Decant 30ml",brand:"Reis STORE",category:"Decantes",price:null,tag:"",description:"Mais perfume, mais momentos com sua fragrância favorita.",notes:"Escolha o perfume desejado no atendimento",image:"",type:"Decant"}
 ];
-
-let current=null;
-let cart=[];
-
-function render(){
- const term=document.getElementById("search").value.toLowerCase();
- const grid=document.getElementById("grid");
- grid.innerHTML="";
- products.forEach((p,i)=>{
-   if(window.currentFilter && window.currentFilter!=="Todos" && p.category!==window.currentFilter) return;
-   if(!p.name.toLowerCase().includes(term)) return;
-   grid.innerHTML+=`
-   <div class="card">
-     <div class="bottle" onclick="showDetail(${i})">
-       ${p.img?`<img src="${p.img}" alt="${p.name}">`:`<div class="placeholder">REIS STORE<br><br>${p.name}</div>`}
-     </div>
-     <div class="cardinfo">
-       <h3>${p.name}</h3>
-       <p>${p.category}</p>
-       <div class="price">R$ ${p.price.toFixed(2).replace(".",",")}</div>
-       <button class="smallbtn" onclick="showDetail(${i})">VER PERFUME</button>
-     </div>
-   </div>`;
- });
-}
-function filterProducts(category){window.currentFilter=category;render()}
-function showDetail(i){
- current=products[i];
- document.getElementById("detailname").textContent=current.name;
- document.getElementById("detaildesc").textContent=current.desc;
- document.getElementById("detailnotes").textContent="Notas olfativas: "+current.notes;
- document.getElementById("detailprice").textContent="R$ "+current.price.toFixed(2).replace(".",",");
- document.getElementById("detailimg").innerHTML=current.img?`<img src="${current.img}">`:`<div class="placeholder">${current.name}</div>`;
- document.getElementById("detail").classList.add("active");
- const sel=document.getElementById("size");
- sel.innerHTML=`<option value="full">Perfume completo — R$ ${current.price}</option>`;
- if(current.dec10)sel.innerHTML+=`<option value="10">Decante 10 ml — R$ ${current.dec10}</option>`;
- if(current.dec30)sel.innerHTML+=`<option value="30">Decante 30 ml — R$ ${current.dec30}</option>`;
-}
-function closeDetail(){document.getElementById("detail").classList.remove("active")}
-function addToCart(){
- const size=document.getElementById("size").value;
- const price=size==="full"?current.price:size==="10"?current.dec10:current.dec30;
- const name=size==="full"?current.name:current.name+" — Decante "+size+" ml";
- cart.push({name,price});
- updateCart();
- closeDetail();
-}
-function updateCart(){
- document.getElementById("cartcount").textContent=cart.length+" itens";
-}
-function openCart(){
- document.getElementById("cart").classList.add("active");
- let html="",total=0;
- cart.forEach((item,i)=>{
- total+=item.price;
- html+=`<div class="cartitem"><span>${item.name}<br>R$ ${item.price.toFixed(2).replace(".",",")}</span><button onclick="removeItem(${i})">Remover</button></div>`;
- });
- document.getElementById("cartitems").innerHTML=html||"Carrinho vazio";
- document.getElementById("total").textContent="Total: R$ "+total.toFixed(2).replace(".",",");
-}
-function closeCart(){document.getElementById("cart").classList.remove("active")}
-function removeItem(i){cart.splice(i,1);updateCart();openCart()}
-function checkout(){
- if(!cart.length){alert("Seu carrinho está vazio.");return}
- let total=cart.reduce((s,i)=>s+i.price,0);
- let msg="Olá! Quero fazer um pedido na Reis STORE:%0A%0A"+cart.map(i=>"- "+i.name+" — R$ "+i.price.toFixed(2).replace(".",",")).join("%0A")+
- "%0A%0ATotal: R$ "+total.toFixed(2).replace(".",",");
- window.open("https://wa.me/5583986721977?text="+encodeURIComponent(msg)," _blank");
-}
-render();
+const WHATSAPP_NUMBER = "5583986721977"; // formato internacional, sem + ou espaços
+const CATEGORIES = ["Todos","Masculinos","Femininos","Unissex","Decantes"];
+let selectedCategory="Todos", searchTerm="", cart=[];
+const $=s=>document.querySelector(s);
+const money=n=>n==null?"Consultar preço":n.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+const safe=(s="")=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function categoryRender(){const el=$("#categories");el.innerHTML=CATEGORIES.map(c=>`<button class="category ${c===selectedCategory?"active":""}" data-category="${safe(c)}">${safe(c)}</button>`).join("");el.querySelectorAll("button").forEach(b=>b.onclick=()=>{selectedCategory=b.dataset.category;categoryRender();renderProducts()})}
+function filtered(){return PRODUCTS.filter(p=>(selectedCategory==="Todos"||p.category===selectedCategory)&&(`${p.name} ${p.brand||""} ${p.category} ${p.description} ${p.notes}`.toLowerCase().includes(searchTerm.toLowerCase())))}
+function imageHTML(p,extraClass=""){return p.image?`<img class="${extraClass}" src="${safe(p.image)}" alt="${safe(p.name)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`+`<div class="img-fallback" style="display:none"><span class="fallback-mark">♛</span><span class="fallback-label">REIS STORE</span></div>`:`<div class="img-fallback"><span class="fallback-mark">♛</span><span class="fallback-label">REIS STORE</span></div>`}
+function renderProducts(){const list=filtered();$("#resultsCount").textContent=`${list.length} ${list.length===1?"fragrância":"fragrâncias"}`;$("#catalogTitle").textContent=searchTerm?"Resultados da busca":selectedCategory==="Todos"?"Catálogo":selectedCategory;const grid=$("#products");if(!list.length){grid.innerHTML=`<div class="empty"><strong>Nenhuma fragrância encontrada.</strong>Tente outro nome ou categoria.</div>`;return;}grid.innerHTML=list.map(p=>`<article class="product-card"><div class="product-visual">${imageHTML(p)}${p.tag?`<span class="product-tag">${safe(p.tag)}</span>`:""}</div><div class="card-content"><div class="brandline">${safe(p.brand||"REIS STORE")} · ${safe(p.type)}</div><h3 class="product-name">${safe(p.name)}</h3><p class="product-desc">${safe(p.description)}</p><div class="price ${p.price==null?"consult":""}">${money(p.price)}</div><div class="card-actions"><button class="btn" data-detail="${p.id}">Ver perfume</button><button class="btn btn-primary" data-add="${p.id}">${p.price==null?"Consultar":"Adicionar"}</button></div></div></article>`).join("");grid.querySelectorAll("[data-detail]").forEach(b=>b.onclick=()=>openDetail(b.dataset.detail));grid.querySelectorAll("[data-add]").forEach(b=>b.onclick=()=>addToCart(b.dataset.add));}
+function openDetail(id){const p=PRODUCTS.find(x=>x.id===id);if(!p)return;$("#detailContent").innerHTML=`<div class="detail-layout"><div class="detail-image">${imageHTML(p)}</div><div class="detail-info"><div class="brandline">${safe(p.brand||"REIS STORE")} · ${safe(p.type)}</div><h2>${safe(p.name)}</h2><div class="price ${p.price==null?"consult":""}">${money(p.price)}</div><p>${safe(p.description)}</p><p><strong>Perfil:</strong> ${safe(p.notes)}</p><button class="btn btn-primary" id="detailAdd">${p.price==null?"Consultar no WhatsApp":"Adicionar ao carrinho"}</button></div></div>`;$("#detailAdd").onclick=()=>{addToCart(id);closeOverlay("detailOverlay")};$("#detailOverlay").classList.add("show")}
+function addToCart(id){const p=PRODUCTS.find(x=>x.id===id);if(!p)return;const item=cart.find(x=>x.id===id);if(item)item.qty++;else cart.push({id,qty:1});updateCart();if(p.price==null){openCart();}}
+function changeQty(id,delta){const item=cart.find(x=>x.id===id);if(!item)return;item.qty+=delta;if(item.qty<=0)cart=cart.filter(x=>x.id!==id);updateCart()}
+function removeItem(id){cart=cart.filter(x=>x.id!==id);updateCart()}
+function cartQty(){return cart.reduce((a,x)=>a+x.qty,0)}
+function cartTotal(){return cart.reduce((a,x)=>a+(PRODUCTS.find(p=>p.id===x.id)?.price||0)*x.qty,0)}
+function updateCart(){const count=cartQty();$("#cartCount").textContent=count;$("#cartFloat").style.display=count?"flex":"none";$("#cartFloatText").textContent=`${count} ${count===1?"item":"itens"} · ${money(cartTotal())}`;$("#cartTotal").textContent=money(cartTotal());const box=$("#cartItems");if(!cart.length){box.innerHTML=`<div class="empty"><strong>Seu carrinho está vazio.</strong>Escolha uma fragrância para começar.</div>`;}else{box.innerHTML=cart.map(i=>{const p=PRODUCTS.find(x=>x.id===i.id);return `<div class="cart-item"><div class="cart-thumb">${p.image?`<img src="${safe(p.image)}" alt="${safe(p.name)}">`:"♛"}</div><div><div class="cart-item-name">${safe(p.name)}</div><div class="cart-item-price">${money(p.price)} ${p.price==null?"· preço a confirmar":"· cada"}</div><div class="qty-controls"><button data-minus="${i.id}">−</button><span>${i.qty}</span><button data-plus="${i.id}">+</button></div></div><button class="remove" data-remove="${i.id}">Remover</button></div>`}).join("");box.querySelectorAll("[data-minus]").forEach(b=>b.onclick=()=>changeQty(b.dataset.minus,-1));box.querySelectorAll("[data-plus]").forEach(b=>b.onclick=()=>changeQty(b.dataset.plus,1));box.querySelectorAll("[data-remove]").forEach(b=>b.onclick=()=>removeItem(b.dataset.remove));}$("#checkout").disabled=!cart.length;}
+function openCart(){$("#cartOverlay").classList.add("show")}function closeOverlay(id){$("#"+id).classList.remove("show")}
+function checkoutWhatsApp(){if(!cart.length)return;const lines=cart.map(i=>{const p=PRODUCTS.find(x=>x.id===i.id);return `• ${i.qty}x ${p.name} — ${p.price==null?"preço a confirmar":money(p.price*i.qty)}`});const unknown=cart.some(i=>PRODUCTS.find(p=>p.id===i.id).price==null);const msg=`Olá, Reis STORE! 🖤\n\nQuero finalizar meu pedido:\n${lines.join("\n")}\n\n${unknown?"*Alguns itens estão com preço a confirmar.*\n":""}*Total dos itens com preço definido: ${money(cartTotal())}*\n\nPode confirmar disponibilidade e finalizar comigo?`;window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`,"_blank");}
+$("#search").addEventListener("input",e=>{searchTerm=e.target.value.trim();renderProducts()});$("#topCart").onclick=openCart;$("#openCart").onclick=openCart;$("#checkout").onclick=checkoutWhatsApp;document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>closeOverlay(b.dataset.close));["cartOverlay","detailOverlay"].forEach(id=>$("#"+id).addEventListener("click",e=>{if(e.target.id===id)closeOverlay(id)}));document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeOverlay("cartOverlay");closeOverlay("detailOverlay")}});$("#year").textContent=new Date().getFullYear();categoryRender();renderProducts();updateCart();
 </script>
 </body>
 </html>
