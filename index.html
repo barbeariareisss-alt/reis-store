@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>REIS STORE</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#101010;color:#f4f1ed;font-family:Arial,sans-serif}
+header{padding:28px 20px;border-bottom:1px solid #292929;text-align:center}
+.logo{font-size:27px;letter-spacing:5px;font-weight:bold}
+.sub{font-size:10px;letter-spacing:4px;color:#999;margin-top:8px}
+nav{display:flex;gap:10px;overflow:auto;padding:15px}
+nav button,.filter{background:#1b1b1b;color:#ddd;border:1px solid #333;border-radius:30px;padding:10px 16px}
+.hero{padding:30px 20px 20px}
+.hero h1{font-size:34px;line-height:1.15;margin:0 0 12px}
+.hero p{color:#999;font-size:14px;line-height:1.6}
+.search{padding:0 20px 20px}
+.search input{width:100%;padding:15px;background:#1a1a1a;border:1px solid #333;color:white;border-radius:12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 12px 30px}
+.card{background:#191919;border:1px solid #292929;border-radius:15px;overflow:hidden}
+.bottle{height:190px;background:linear-gradient(145deg,#252525,#111);display:flex;align-items:center;justify-content:center;padding:15px}
+.bottle img{max-width:100%;max-height:100%;object-fit:contain}
+.placeholder{font-size:12px;color:#666;letter-spacing:2px;text-align:center}
+.cardinfo{padding:13px}
+.cardinfo h3{font-size:15px;margin:0 0 7px}
+.cardinfo p{font-size:11px;color:#999;margin:0 0 10px}
+.price{font-size:17px;font-weight:bold;margin:8px 0}
+.smallbtn{width:100%;background:#e5dfd5;color:#111;border:0;padding:11px;border-radius:8px;font-weight:bold}
+.detail{display:none;position:fixed;inset:0;background:#101010;z-index:5;overflow:auto;padding:20px}
+.detail.active{display:block}
+.close{float:right;background:#222;color:white;border:1px solid #444;padding:10px 15px;border-radius:8px}
+.detailimg{height:280px;background:#1b1b1b;display:flex;align-items:center;justify-content:center;margin-top:20px;border-radius:15px}
+.detailimg img{max-height:95%;max-width:95%;object-fit:contain}
+.detail h2{margin-top:20px}
+.notes{color:#aaa;font-size:14px;line-height:1.7}
+select, .qty{background:#1b1b1b;color:white;border:1px solid #444;padding:12px;border-radius:8px;width:100%;margin:8px 0}
+.add{background:#e5dfd5;color:#111;padding:15px;border:0;border-radius:9px;width:100%;font-weight:bold;margin-top:10px}
+.cartbar{position:fixed;bottom:12px;left:12px;right:12px;background:#e5dfd5;color:#111;padding:16px;border-radius:12px;font-weight:bold;display:flex;justify-content:space-between;align-items:center;z-index:3}
+.cart{display:none;position:fixed;inset:0;background:#101010;z-index:8;padding:20px;overflow:auto}
+.cart.active{display:block}
+.cartitem{display:flex;justify-content:space-between;border-bottom:1px solid #333;padding:15px 0;gap:10px}
+.checkout{background:#25d366;color:#111;border:0;border-radius:10px;padding:15px;width:100%;font-weight:bold;margin-top:20px}
+footer{text-align:center;color:#777;padding:30px;font-size:11px;letter-spacing:2px}
+@media(min-width:700px){.grid{grid-template-columns:repeat(4,1fr)}.hero{max-width:900px;margin:auto}.search{max-width:900px;margin:auto}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">♛ REIS STORE</div>
+  <div class="sub">PERFUMARIA • ORIGINAL • DECANTS</div>
+</header>
+
+<nav>
+  <button onclick="filterProducts('Todos')">Todos</button>
+  <button onclick="filterProducts('Masculino')">Masculinos</button>
+  <button onclick="filterProducts('Unissex')">Unissex</button>
+  <button onclick="filterProducts('Feminino')">Femininos</button>
+  <button onclick="filterProducts('Decantes')">Decantes</button>
+</nav>
+
+<section class="hero">
+  <h1>Encontre sua<br>assinatura.</h1>
+  <p>Perfumes que marcam presença. Descubra sua próxima fragrância.</p>
+</section>
+
+<div class="search">
+  <input id="search" placeholder="Buscar perfume..." oninput="render()">
+</div>
+
+<div class="grid" id="grid"></div>
+
+<footer>REIS STORE — PERFUME É IDENTIDADE.</footer>
+
+<div class="cartbar" onclick="openCart()">
+  <span>🛒 Meu carrinho</span>
+  <span id="cartcount">0 itens</span>
+</div>
+
+<div class="detail" id="detail">
+  <button class="close" onclick="closeDetail()">✕ FECHAR</button>
+  <div class="detailimg" id="detailimg"></div>
+  <h2 id="detailname"></h2>
+  <p id="detaildesc" class="notes"></p>
+  <p id="detailnotes" class="notes"></p>
+  <h3 id="detailprice"></h3>
+  <select id="size">
+    <option value="full">Perfume completo</option>
+    <option value="10">Decante 10 ml</option>
+    <option value="30">Decante 30 ml</option>
+  </select>
+  <button class="add" onclick="addToCart()">ADICIONAR AO CARRINHO</button>
+</div>
+
+<div class="cart" id="cart">
+  <button class="close" onclick="closeCart()">✕ VOLTAR À LOJA</button>
+  <h2>Seu carrinho</h2>
+  <div id="cartitems"></div>
+  <h3 id="total"></h3>
+  <button class="checkout" onclick="checkout()">FINALIZAR PELO WHATSAPP</button>
+</div>
+
+<script>
+const products = [
+ {name:"Club de Nuit Intense Man",category:"Masculino",price:289,dec10:35,dec30:85,notes:"Limão, abacaxi, bergamota, groselha e maçã. Notas de coração: bétula, jasmim e rosa. Base: musk, âmbar, patchouli e baunilha.",img:"",desc:"Uma fragrância marcante, elegante e versátil."},
+ {name:"Bareeq Al Dhahab",category:"Unissex",price:159,dec10:25,dec30:60,notes:"Consulte a ficha olfativa da fragrância.",img:"",desc:"Uma fragrância para quem gosta de presença."},
+ {name:"Khamrah Dukhan",category:"Unissex",price:259,dec10:35,dec30:85,notes:"Consulte a ficha olfativa da fragrância.",img:"",desc:"Intenso, envolvente e cheio de personalidade."},
+ {name:"Hawas Black",category:"Masculino",price:279,dec10:35,dec30:85,notes:"Abacaxi, grapefruit e bergamota. Cedro, patchouli e jasmim. Base amadeirada, âmbar e musgo.",img:"",desc:"Uma fragrância moderna, marcante e envolvente."},
+ {name:"Ravine Ginger",category:"Unissex",price:267,dec10:35,dec30:85,notes:"Gengibre, bergamota e limão. Flor de laranjeira, jasmim, rosa e magnólia. Baunilha, musk, sândalo, âmbar, patchouli e madeiras cashmere.",img:"",desc:"Uma fragrância vibrante com personalidade."},
+ {name:"Honor & Glory",category:"Unissex",price:189,dec10:30,dec30:75,notes:"Consulte a ficha olfativa da fragrância.",img:"",desc:"Um perfume que combina presença e estilo."},
+ {name:"Attar Al Wesal",category:"Unissex",price:149,dec10:25,dec30:60,notes:"Consulte a ficha olfativa da fragrância.",img:"",desc:"Uma experiência olfativa para descobrir."},
+ {name:"Hércules",category:"Masculino",price:199,dec10:30,dec30:75,notes:"Consulte a ficha olfativa da fragrância.",img:"",desc:"Uma fragrância de personalidade."},
+ {name:"Sex on the Rocks",category:"Unissex",price:199,dec10:30,dec30:75,notes:"Consulte a ficha olfativa da fragrância.",img:"",desc:"Uma fragrância para ocasiões especiais."},
+ {name:"Vulcan Feu",category:"Unissex",price:299,dec10:40,dec30:95,notes:"Manga, gengibre, limão, ruibarbo e pimenta rosa. Jasmim, violeta e praline. Tonka, cedro, âmbar gris e musgo.",img:"",desc:"Intenso, ousado e com presença."},
+ {name:"Al Layl",category:"Unissex",price:179,dec10:30,dec30:70,notes:"Framboesa, café, lavanda e bergamota. Pêssego, jasmim, rosa e cashmeran. Sândalo, patchouli e musk.",img:"",desc:"Uma fragrância com personalidade."},
+ {name:"Ameer Al Arab",category:"Masculino",price:149,dec10:25,dec30:60,notes:"Jasmim e mirra. Manjericão, cardamomo, lavanda e pimenta. Patchouli, açafrão e sândalo.",img:"",desc:"Elegância árabe com personalidade."},
+ {name:"Maahir Original",category:"Unissex",price:179,dec10:30,dec30:70,notes:"Frutas vermelhas, pêssego e bergamota. Jasmim, peônia e lírio vermelho. Sândalo, musk e baunilha.",img:"",desc:"Uma fragrância expressiva e sofisticada."},
+ {name:"Al Noble Safeer",category:"Masculino",price:140,dec10:25,dec30:60,notes:"Gengibre, pimenta preta, bergamota e grapefruit. Heliotrópio, jasmim e caramelo. Musk, cypriol, cashmere, ambergris, baunilha e guaiaco.",img:"",desc:"Uma fragrância de presença."},
+ {name:"No. 2 Men",category:"Masculino",price:199,dec10:30,dec30:75,notes:"Bergamota e lavanda. Gengibre e cardamomo. Incenso, guaiaco, ládano, musk, sândalo e vetiver.",img:"",desc:"Elegante e sofisticado."},
+ {name:"Al Noble Wazeer",category:"Masculino",price:169,dec10:30,dec30:70,notes:"Maçã, cognac, noz-moscada e açafrão. Whisky, carvalho, cedro e sândalo. Musk, mirra, ambroxan e baunilha.",img:"",desc:"Uma fragrância amadeirada e envolvente."}
+];
+
+let current=null;
+let cart=[];
+
+function render(){
+ const term=document.getElementById("search").value.toLowerCase();
+ const grid=document.getElementById("grid");
+ grid.innerHTML="";
+ products.forEach((p,i)=>{
+   if(window.currentFilter && window.currentFilter!=="Todos" && p.category!==window.currentFilter) return;
+   if(!p.name.toLowerCase().includes(term)) return;
+   grid.innerHTML+=`
+   <div class="card">
+     <div class="bottle" onclick="showDetail(${i})">
+       ${p.img?`<img src="${p.img}" alt="${p.name}">`:`<div class="placeholder">REIS STORE<br><br>${p.name}</div>`}
+     </div>
+     <div class="cardinfo">
+       <h3>${p.name}</h3>
+       <p>${p.category}</p>
+       <div class="price">R$ ${p.price.toFixed(2).replace(".",",")}</div>
+       <button class="smallbtn" onclick="showDetail(${i})">VER PERFUME</button>
+     </div>
+   </div>`;
+ });
+}
+function filterProducts(category){window.currentFilter=category;render()}
+function showDetail(i){
+ current=products[i];
+ document.getElementById("detailname").textContent=current.name;
+ document.getElementById("detaildesc").textContent=current.desc;
+ document.getElementById("detailnotes").textContent="Notas olfativas: "+current.notes;
+ document.getElementById("detailprice").textContent="R$ "+current.price.toFixed(2).replace(".",",");
+ document.getElementById("detailimg").innerHTML=current.img?`<img src="${current.img}">`:`<div class="placeholder">${current.name}</div>`;
+ document.getElementById("detail").classList.add("active");
+ const sel=document.getElementById("size");
+ sel.innerHTML=`<option value="full">Perfume completo — R$ ${current.price}</option>`;
+ if(current.dec10)sel.innerHTML+=`<option value="10">Decante 10 ml — R$ ${current.dec10}</option>`;
+ if(current.dec30)sel.innerHTML+=`<option value="30">Decante 30 ml — R$ ${current.dec30}</option>`;
+}
+function closeDetail(){document.getElementById("detail").classList.remove("active")}
+function addToCart(){
+ const size=document.getElementById("size").value;
+ const price=size==="full"?current.price:size==="10"?current.dec10:current.dec30;
+ const name=size==="full"?current.name:current.name+" — Decante "+size+" ml";
+ cart.push({name,price});
+ updateCart();
+ closeDetail();
+}
+function updateCart(){
+ document.getElementById("cartcount").textContent=cart.length+" itens";
+}
+function openCart(){
+ document.getElementById("cart").classList.add("active");
+ let html="",total=0;
+ cart.forEach((item,i)=>{
+ total+=item.price;
+ html+=`<div class="cartitem"><span>${item.name}<br>R$ ${item.price.toFixed(2).replace(".",",")}</span><button onclick="removeItem(${i})">Remover</button></div>`;
+ });
+ document.getElementById("cartitems").innerHTML=html||"Carrinho vazio";
+ document.getElementById("total").textContent="Total: R$ "+total.toFixed(2).replace(".",",");
+}
+function closeCart(){document.getElementById("cart").classList.remove("active")}
+function removeItem(i){cart.splice(i,1);updateCart();openCart()}
+function checkout(){
+ if(!cart.length){alert("Seu carrinho está vazio.");return}
+ let total=cart.reduce((s,i)=>s+i.price,0);
+ let msg="Olá! Quero fazer um pedido na Reis STORE:%0A%0A"+cart.map(i=>"- "+i.name+" — R$ "+i.price.toFixed(2).replace(".",",")).join("%0A")+
+ "%0A%0ATotal: R$ "+total.toFixed(2).replace(".",",");
+ window.open("https://wa.me/5583986721977?text="+encodeURIComponent(msg)," _blank");
+}
+render();
+</script>
+</body>
+</html>
