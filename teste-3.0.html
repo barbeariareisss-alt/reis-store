@@ -71,6 +71,20 @@ footer{border-top:1px solid var(--line);padding:32px 0 40px;color:var(--muted)}.
 .dv-choice-option-body button{margin-top:5px;width:100%;min-height:48px;justify-content:center;font-size:11px;letter-spacing:.08em}
 @media(max-width:500px){.dv-card{grid-template-columns:minmax(115px,38%) 1fr}.dv-card-image{min-height:165px}.dv-card-body{padding:12px!important}.dv-choice-modal{padding:14px}.dv-choice-option-body{padding:10px}.dv-choice-option-body h4{font-size:14px}.dv-choice-option-body .price{font-size:15px}.dv-choice-option-body button{padding:10px 7px;font-size:10px}}
 
+
+/* REIS STORE — ajuste compacto do cabeçalho do carrinho na tela Decants */
+@media(max-width:650px){
+  .dv-head{padding:10px 12px;gap:8px;min-height:64px;display:flex;align-items:center;justify-content:space-between}
+  .dv-head button{white-space:nowrap;flex:0 0 auto;padding:8px 10px;font-size:12px;line-height:1.2;border-radius:9px;max-width:none}
+  .dv-head .pp-brand{flex:1;min-width:0;text-align:center;font-size:9px;letter-spacing:.13em;line-height:1.35;white-space:normal;padding:0 3px}
+  .dv-head button:last-child{display:flex;align-items:center;justify-content:center;gap:5px}
+  #dvCartCount{display:inline-grid;place-items:center;min-width:18px;height:18px;padding:0 4px;border-radius:99px;background:var(--gold);color:#111;font-size:10px;font-weight:750}
+}
+@media(max-width:380px){
+  .dv-head{padding:9px 8px;gap:6px}
+  .dv-head button{padding:7px 8px;font-size:11px}
+  .dv-head .pp-brand{font-size:8px;letter-spacing:.1em}
+}
 </style>
 </head>
 <body>
