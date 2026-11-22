@@ -22,6 +22,24 @@ footer{border-top:1px solid var(--line);padding:32px 0 40px;color:var(--muted)}.
 @media(max-width:900px){.products{grid-template-columns:repeat(3,1fr)}.hero-frame{min-height:390px}.hero-content{padding:40px}.nav{gap:15px}.hero-art{right:2%;width:40%}}
 @media(max-width:650px){.overlay{padding:max(10px,env(safe-area-inset-top)) 10px max(10px,env(safe-area-inset-bottom));align-items:center}.modal{width:100%;max-height:calc(100dvh - max(20px,env(safe-area-inset-top)) - max(20px,env(safe-area-inset-bottom)));border-radius:16px;padding:16px}.modal-top{top:0;margin:-16px -16px 10px;padding:13px 16px}.modal-product-img{height:clamp(180px,32dvh,270px);min-height:180px}.modal-actions .btn{min-width:0}.header{height:64px}.nav{display:none}.brand-name{font-size:15px}.brand-sub{font-size:8px}.hero{padding:14px 0 30px}.hero-frame{min-height:440px;align-items:end}.hero-frame:after{background:linear-gradient(0deg,rgba(5,6,6,.97) 0%,rgba(5,6,6,.78) 46%,rgba(5,6,6,.12) 100%)}.hero-art{top:2%;right:0;width:65%;height:58%;opacity:.8}.hero-content{padding:26px 22px 30px}.hero h1{font-size:43px}.hero p{font-size:13px}.categories{grid-template-columns:repeat(2,1fr);gap:9px}.category{min-height:105px;padding:15px}.category strong{font-size:15px}.section{padding:22px 0 36px}.section-head h2{font-size:22px}.section-head p{max-width:130px;text-align:right}.products{grid-template-columns:repeat(2,1fr);gap:9px}.product-image{height:175px;padding:10px}.product-info{padding:12px}.product-name{font-size:14px}.product-desc{font-size:10px;min-height:45px}.product-bottom{padding-top:12px}.price{font-size:12px}.tag{font-size:8px}.discovery{grid-template-columns:1fr}.discover-card{min-height:210px}.decants{gap:9px}.decant-card{padding:16px;min-height:175px}.decant-card .ml{font-size:26px}.trust{grid-template-columns:1fr}.footer-row{align-items:flex-start;flex-direction:column}.footer-links{flex-wrap:wrap}.wrap{width:min(var(--max),calc(100% - 28px))}.cart-summary-total strong{font-size:21px}.cart-row{gap:7px}.cart-row strong{font-size:12px}}
 @media(max-width:370px){.products{gap:7px}.product-image{height:150px}.product-info{padding:10px}.hero h1{font-size:38px}}
+
+/* REIS STORE — modal mobile compacto (ajuste visual solicitado) */
+@media(max-width:650px){
+  #detailOverlay{padding:8px;align-items:center}
+  #detailOverlay .modal{padding:13px;max-height:calc(100dvh - 16px);border-radius:15px}
+  #detailOverlay .modal-top{margin:-13px -13px 7px;padding:11px 13px;top:0}
+  #detailContent h2{font-size:18px;margin:7px 0 9px;line-height:1.25}
+  #detailContent .modal-product-img{height:clamp(145px,23dvh,205px);min-height:145px;margin:8px 0 11px;padding:8px;border-radius:10px}
+  #detailContent .modal-detail-copy{gap:5px}
+  #detailContent .modal-copy{font-size:12px;line-height:1.5}
+  #detailContent .modal-price{font-size:18px;margin:9px 0 10px}
+  #detailContent .modal-actions{gap:8px}
+  #detailContent .modal-actions .btn{min-height:44px;padding:12px 10px;font-size:10px;letter-spacing:.14em}
+}
+@media(max-height:720px) and (max-width:650px){
+  #detailContent .modal-product-img{height:clamp(125px,20dvh,175px);min-height:125px}
+}
+
 </style>
 </head>
 <body>
