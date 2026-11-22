@@ -22,6 +22,18 @@
     @media(min-width:700px){.hero{padding:65px 0 35px}.product-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.product-visual{height:300px}.card-content{padding:17px}.product-name{font-size:16px;min-height:42px}.product-desc{min-height:40px}.brand-name{font-size:24px}.header-inner{padding:24px 0}.about{padding:40px}.overlay{align-items:center}.drawer{border-radius:22px;max-height:85vh}.cart-float{bottom:22px}}
     @media(min-width:1000px){.product-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.product-visual{height:330px}.hero h1{max-width:850px}}
     @media(max-width:380px){.brand-name{font-size:17px;letter-spacing:.22em}.product-visual{height:175px}.card-content{padding:11px}.card-actions{flex-direction:column}.btn{padding:10px}.hero h1{font-size:34px}}
+
+  
+  .product-card{
+  transition:transform .25s ease,border-color .25s ease;
+}
+.product-card:hover{
+  transform:translateY(-4px);
+  border-color:#c9b783;
+}
+.product-image{
+  background:radial-gradient(circle,#292929 0%,#111 70%);
+}
   </style>
 </head>
 <body>
